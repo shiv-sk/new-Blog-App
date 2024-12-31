@@ -13,7 +13,7 @@ export default function MyBlogs(){
         }else{
             setUserId(user._id)
         }
-    } , [])
+    } , [user])
 
     useEffect(()=>{
         const getUserBlog = async()=>{
