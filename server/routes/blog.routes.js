@@ -1,0 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const validationMiddleware = require("../middleware/validation.middleware");
+const validationSchema = require("../validation/blog.validation");
+const blogController = require("../controller/blog.controller");
+router.route("/newblog" ).post(validationMiddleware(validationSchema) , blogController.newBlog);
+router.route("/allblogs").get(blogController.getAllBlogs);
+router.route("/user/blogs/:userId").get(blogController.getBlogsOfUser);
+router.route("/deleteblog/:blogId").delete(blogController.deleteBlog);
+router.route("/updateblog/:blogId").patch(blogController.updateBlog);
+module.exports = router;
