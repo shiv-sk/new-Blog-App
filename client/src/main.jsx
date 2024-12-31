@@ -9,6 +9,7 @@ import BlogDetailpage from './pages/BlogDetail.jsx';
 import NewBlog from './pages/NewBlog.jsx';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,8 +47,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AuthProvider>
     <RouterProvider router={router}>
       <App/>
     </RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )

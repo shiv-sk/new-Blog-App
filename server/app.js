@@ -6,17 +6,20 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-const whitelist = ['http://localhost:5173/', 'http://example2.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions));
+const allowedOrigins = ["http://localhost:5173"];
+const corsOption = {
+    origin:function(origin , callback){
+        if(!origin || allowedOrigins.includes(origin)){
+            callback(null , true);
+        }
+        else{
+            console.log("blocked by origin: " , origin)
+        }
+    },
+    credentials:true,
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOption));
 
 //routes
 const userRoutes = require("./routes/user.routes");
